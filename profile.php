@@ -1,3 +1,6 @@
+<?php 
+  $sql = $conn->query("SELECT * FROM tb_user WHERE user_id='".$_SESSION['user_id']."' ");
+?>
 <section >
   <div class="container py-5">
 
