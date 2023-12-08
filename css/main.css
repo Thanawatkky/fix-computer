@@ -1,0 +1,7 @@
+@font-face {
+    font-family: "Kanit";
+    src: url(../Kanit/Kanit-Light.ttf);
+}
+body{
+    font-family: "Kanit", sans-serif !important;
+}
