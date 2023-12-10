@@ -1,22 +1,17 @@
-<?php 
-  $sql = $conn->query("SELECT * FROM tb_user WHERE user_id='".$_SESSION['user_id']."' ");
-?>
+
 <section >
-  <div class="container py-5">
+  <div class="container py-5"  id="profile-user">
 
 
     <div class="row">
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+            <img src="img/profile/<?= $fet_profile->user_img; ?>" alt="avatar"
               class="rounded-circle img-fluid" style="width: 150px;">
-            <h5 class="my-3">John Smith</h5>
-            <p class="text-muted mb-1">Full Stack Developer</p>
-            <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+            <h5 class="my-3"><?= $fet_profile->fname." ".$fet_profile->lname; ?></h5>
             <div class="d-flex justify-content-center mb-2">
-              <button type="button" class="btn btn-primary">Follow</button>
-              <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+              <button type="button" class="btn btn-outline-primary ms-1"  data-fname="<?= $fet_profile->fname; ?>" data-lname="<?= $fet_profile->lname; ?>"  data-tel="<?= $fet_profile->tel; ?>" data-toggle="modal" data-target="#modal-profile" id="btn-edit">Edit</button>
             </div>
           </div>
         </div>
@@ -27,46 +22,29 @@
           <div class="card-body">
             <div class="row">
               <div class="col-sm-3">
+                <p class="mb-0">Username</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><?= $fet_profile->username; ?></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
                 <p class="mb-0">Full Name</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">Johnatan Smith</p>
+                <p class="text-muted mb-0"><?= $fet_profile->fname." ".$fet_profile->lname; ?></p>
               </div>
             </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Email</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">example@example.com</p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Phone</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">(097) 234-5678</p>
-              </div>
-            </div>
+            
             <hr>
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0">Mobile</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">(098) 765-4321</p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Address</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                <p class="text-muted mb-0"><?= $fet_profile->tel; ?></p>
               </div>
             </div>
           </div>
@@ -76,3 +54,40 @@
     </div>
   </div>
 </section>
+<div class="modal fade" id="modal-profile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Edit Profile</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+        <form action="api/ac_profile.php?ac=user" method="post" enctype="multipart/form-data" id="frm_profile">
+          <div class="form-group">
+              <label for="fname">ชื่อ</label>
+              <input type="text" name="fname" id="fname1" class="form-control">
+          </div>
+          <div class="form-group">
+              <label for="fname">นามสกุล</label>
+              <input type="text" name="lname" id="lname1" class="form-control">
+          </div>
+          <div class="form-group">
+              <label for="fname">เบอร์โทรศัพท์</label>
+              <input type="text" name="tel" id="tel1" class="form-control">
+          </div>
+          <div class="form-group">
+              <label for="fname">รูปโปรไฟล์</label>
+              <input type="file" name="user_img" id="user_img">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">ยืนยัน</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
